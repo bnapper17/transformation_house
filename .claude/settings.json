@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(node verify_footer.js)",
+      "Bash(node -e ' *)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 24112 //T //F)",
+      "Bash(taskkill //PID 5516 //T //F)",
+      "Bash(node verify_mobilenav.js)",
+      "Bash(taskkill //PID 10960 //T //F)",
+      "Bash(node verify_home.js)",
+      "Bash(taskkill //PID 21876 //T //F)",
+      "Bash(taskkill //PID 12900 //T //F)",
+      "Bash(npm audit *)"
+    ]
+  }
+}
