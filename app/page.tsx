@@ -47,12 +47,18 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="nav:hidden flex-none flex justify-center pb-6 pt-2">
+        <div className="nav:hidden flex-none flex justify-center gap-4 pb-6 pt-2">
           <Link
             href="/apply"
             className="rounded-full bg-secondary px-8 py-3 text-lg text-white shadow-lg hover:bg-secondary/90 transition-colors"
           >
             Apply Now
+          </Link>
+          <Link
+            href="/giving"
+            className="rounded-full bg-secondary px-8 py-3 text-lg text-white shadow-lg hover:bg-secondary/90 transition-colors"
+          >
+            Give
           </Link>
         </div>
 

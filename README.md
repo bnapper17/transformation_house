@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Butterfly Transformation House
+
+Website for Butterfly Transformation House, a faith-based halfway house and
+sober living program in Laconia, Indiana. Built with Next.js (App Router),
+TypeScript, and Tailwind CSS.
+
+## Pages
+
+| Route          | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| `/`            | Home                                                                |
+| `/program`     | Program overview (Vision, Church Services, Meetings)                |
+| `/testimonies` | Testimonies from past residents                                     |
+| `/giving`      | Donation form (collects intent via email — no payment processing yet, see below) |
+| `/contact`     | Contact info + message form                                        |
+| `/apply`       | Program application form                                           |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.local` (not committed — see `.gitignore`) and fill in:
 
-## Learn More
+| Variable                   | Required | Purpose                                                                 |
+| --------------------------- | -------- | ------------------------------------------------------------------------ |
+| `SMTP_HOST`                 | Yes      | SMTP server host (e.g. `smtp.gmail.com`)                                |
+| `SMTP_PORT`                 | Yes      | SMTP port (e.g. `465`)                                                  |
+| `SMTP_USER`                 | Yes      | SMTP account username                                                    |
+| `SMTP_PASS`                 | Yes      | SMTP account password / app password                                     |
+| `SMTP_FROM`                 | No       | "From" address on outgoing mail; defaults to `SMTP_USER`                |
+| `CONTACT_RECIPIENT_EMAIL`   | No       | Where Contact/Apply/Giving submissions are delivered; defaults to `castbyfire@gmail.com` |
+| `NEXT_PUBLIC_SITE_URL`      | No       | Canonical site URL used in the sitemap and metadata; falls back to Vercel's `VERCEL_URL`, then `localhost:3000` |
+| `NEXT_PUBLIC_SITE_IS_LIVE`  | No       | Set to `"true"` only once real content/photos are final and the production domain is live — see below |
 
-To learn more about Next.js, take a look at the following resources:
+Without the `SMTP_*` variables, the Contact/Apply/Giving forms still render
+and validate normally, but submission will fail with a handled error (nothing
+crashes — there's just nowhere to send the email).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `NEXT_PUBLIC_SITE_IS_LIVE`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This site currently has placeholder content (the Program page's body copy is
+still lorem ipsum, and some photos are expected to change). `robots.txt` and
+page-level `<meta name="robots">` tags are **set to block search indexing by
+default** so this doesn't get crawled/cached prematurely. Once the real
+content and final domain are in place, set `NEXT_PUBLIC_SITE_IS_LIVE=true` in
+the deployment environment to allow indexing.
 
-## Deploy on Vercel
+## Email
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contact, Apply, and Giving submissions all send formatted emails via
+`lib/mailer.ts` (nodemailer over SMTP) rather than a third-party service —
+see the env vars above to configure.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Giving page note:** the donation form is built with Stripe in mind (preset
+amounts, "give anonymously" option) but does not process payments yet. For
+now it only emails the donation intent — real card processing requires a
+Stripe account and integration work.
+
+## SEO
+
+- `app/robots.ts` / `app/sitemap.ts` — generated from code, gated by
+  `NEXT_PUBLIC_SITE_IS_LIVE`
+- Per-page `metadata` exports (title/description) on every route
+- `NGO` JSON-LD structured data in the root layout (`app/layout.tsx`), sourced
+  from `lib/contactInfo.ts`
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) 16 (App Router, Turbopack)
+- [React](https://react.dev) 19
+- [Tailwind CSS](https://tailwindcss.com) 4
+- [Nodemailer](https://nodemailer.com) for transactional email
+- TypeScript
+
+## Deployment
+
+Deployed on [Vercel](https://vercel.com). Pushing to `main` triggers a build;
+remember to set the environment variables above in the Vercel project
+settings — `.env.local` is not committed and won't carry over automatically.
