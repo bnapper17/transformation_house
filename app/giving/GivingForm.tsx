@@ -92,7 +92,7 @@ export default function GivingForm() {
         src={ButterfliesBg}
         alt=""
         fill
-        priority
+        preload
         sizes="100vw"
         className="object-cover -z-20"
       />
@@ -122,7 +122,7 @@ export default function GivingForm() {
             onSubmit={handleSubmit}
             className="space-y-6 rounded-lg border border-accent/40 bg-background/90 backdrop-blur-md p-6 sm:p-8 shadow-lg"
           >
-            <Field label="Donation Amount" required>
+            <Field label="Donation Amount" required group>
               <div className="grid grid-cols-4 gap-2">
                 {PRESET_AMOUNTS.map((preset) => (
                   <button

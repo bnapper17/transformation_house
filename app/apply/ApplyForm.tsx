@@ -176,6 +176,9 @@ export default function ApplyForm() {
       });
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
+      // The submit button sits at the bottom of a long form; without this the
+      // much shorter confirmation view can render scrolled out of sight.
+      window.scrollTo({ top: 0 });
     } catch {
       setSubmitError(
         "Something went wrong sending your application. Please try again, or contact us directly."
@@ -323,7 +326,7 @@ export default function ApplyForm() {
               />
             </Field>
 
-            <Field label="Gender" required>
+            <Field label="Gender" required group>
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 text-foreground">
                   <input
@@ -350,7 +353,7 @@ export default function ApplyForm() {
               </div>
             </Field>
 
-            <Field label="Marital Status" required>
+            <Field label="Marital Status" required group>
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 text-foreground">
                   <input
@@ -379,7 +382,7 @@ export default function ApplyForm() {
           </Section>
 
           <Section title="Dependents">
-            <Field label="Do you have any dependents?" required>
+            <Field label="Do you have any dependents?" required group>
               <YesNo
                 name="hasDependents"
                 required
@@ -449,7 +452,7 @@ export default function ApplyForm() {
                 />
               </Field>
 
-              <Field label="Are you on Probation?" required>
+              <Field label="Are you on Probation?" required group>
                 <YesNo
                   name="onProbation"
                   required
@@ -488,7 +491,7 @@ export default function ApplyForm() {
           </Section>
 
           <Section title="Medical History">
-            <Field label="Are you currently on any medication?" required>
+            <Field label="Are you currently on any medication?" required group>
               <YesNo
                 name="onMedication"
                 required
@@ -520,7 +523,7 @@ export default function ApplyForm() {
               </div>
             )}
 
-            <Field label="Have you ever had psychiatric care?" required>
+            <Field label="Have you ever had psychiatric care?" required group>
               <YesNo
                 name="psychiatricCare"
                 required
@@ -531,7 +534,7 @@ export default function ApplyForm() {
           </Section>
 
           <Section title="Other">
-            <Field label="Do you have a valid driver's license?" required>
+            <Field label="Do you have a valid driver's license?" required group>
               <YesNo
                 name="validLicense"
                 required

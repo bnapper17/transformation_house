@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import logoImage from "../public/images/logo_image.png";
+import logoImage from "@/public/images/logo_image.png";
 import { useMapsHref } from "@/lib/useMapsHref";
 import { useCurrentYear } from "@/lib/useCurrentYear";
 import {
@@ -64,7 +64,8 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-6 text-center sm:text-left">
           <Image
             src={logoImage}
-            alt="Butterfly Transformation House"
+            alt=""
+            sizes="56px"
             className="h-14 w-14 flex-none"
           />
           <p className="font-serif italic text-lg sm:text-xl text-white leading-snug">
@@ -75,9 +76,9 @@ export default function Footer() {
 
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-white/70">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white/70">
               Contact
-            </h3>
+            </h2>
             <FooterLink
               href={LADIES_PHONE_HREF}
               icon={<PhoneIcon className="h-5 w-5" />}
@@ -109,9 +110,9 @@ export default function Footer() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-white/70">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white/70">
               Follow Us
-            </h3>
+            </h2>
             <FooterLink
               href={FACEBOOK_URL}
               icon={<FacebookIcon className="h-5 w-5" />}
@@ -122,7 +123,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/20 pt-4 text-center text-sm text-white/70">
-          &copy; {year} nTouch Solutions. All rights reserved.
+          <p>&copy; {year} Butterfly Transformation House. All rights reserved.</p>
+          <p className="mt-1 text-xs">Website by Ntouch Solutions</p>
         </div>
       </div>
     </footer>

@@ -37,7 +37,9 @@ export default function MobileNav() {
         {open ? <CloseIcon className="h-8 w-8" /> : <DotsIcon className="h-8 w-8" />}
       </button>
 
+      {/* inert while closed so the off-screen links can't be tabbed to or read by screen readers. */}
       <div
+        inert={!open}
         className={`fixed inset-y-0 left-0 z-40 w-4/5 bg-background/80 backdrop-blur-md shadow-xl transition-transform duration-300 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}

@@ -3,7 +3,6 @@
 :root {
   --background: #fffee8;
   --foreground: #171717;
-  /* --primary: #174b5f; */
   --primary: #66d6da;
   --secondary: #8e55aa;
   --accent: #f3be51;
@@ -12,8 +11,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
@@ -24,14 +21,11 @@
   --breakpoint-nav: 1074px;
 }
 
+/* Brand colors stay the same in dark mode; only the page background and text flip. */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1e2939;
     --foreground: #ededed;
-    /* --primary: #f3be51; */
-    --primary: #66d6da;
-    --secondary: #8e55aa;
-    --accent: #f3be51;
   }
 }
 
@@ -41,6 +35,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.font-script{
+.font-script {
   font-family: var(--font-script), "Brush Script MT", "Segoe Script", cursive;
 }

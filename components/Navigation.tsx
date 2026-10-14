@@ -10,16 +10,13 @@ export const NAV_LINKS = [
 ];
 
 export default function Navigation() {
-
   return(
-    <div>
-      <nav className="flex flex-row items-center w-full justify-center gap-3 px-5 text-primary md:text-xl text-lg">
-        {NAV_LINKS.map((link) => (
-          <Link key={link.label} href={link.href}>
-            {link.label}
-          </Link>
-        ))}
-      </nav>
-    </div>
+    <nav className="flex flex-row items-center w-full justify-center gap-3 px-5 text-primary md:text-xl text-lg">
+      {NAV_LINKS.map((link) => (
+        <Link key={link.label} href={link.href}>
+          {link.label}
+        </Link>
+      ))}
+    </nav>
   )
-};
+}

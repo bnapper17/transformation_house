@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Image from "next/image";
 
-import LexiePhoto from "@/public/images/lexie.jpg";
+import LexiePhoto from "@/public/images/lexie.jpeg";
 import AshleyPhoto from "@/public/images/ashley.jpg";
 import CodyPhoto from "@/public/images/cody.jpg";
 import TrishPhoto from "@/public/images/trish.jpg";
@@ -61,7 +61,7 @@ export default function Testimonies() {
             the renewal of your mind&hellip;&rdquo;
           </p>
           <p className="text-secondary font-semibold mt-2">
-            &mdash; Romans 12:2-3
+            &mdash; Romans 12:2
           </p>
         </blockquote>
 

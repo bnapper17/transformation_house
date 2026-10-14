@@ -9,7 +9,10 @@ export const MENS_CONTACT_NAME = "Paul Horn";
 export const CONTACT_EMAIL = "butterflytransformationhouse@gmail.com";
 
 export const ADDRESS_LINE_1 = "2515 Hooptown Rd SE";
-export const ADDRESS_LINE_2 = "Laconia, IN 47135";
+export const ADDRESS_CITY = "Laconia";
+export const ADDRESS_STATE = "IN";
+export const ADDRESS_ZIP = "47135";
+export const ADDRESS_LINE_2 = `${ADDRESS_CITY}, ${ADDRESS_STATE} ${ADDRESS_ZIP}`;
 export const FULL_ADDRESS = `${ADDRESS_LINE_1}, ${ADDRESS_LINE_2}`;
 
 export const FACEBOOK_URL = "https://www.facebook.com/TheButterflyTransformationHouse";

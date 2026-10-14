@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
+import { Dancing_Script } from "next/font/google";
 import Footer from "@/components/Footer";
 import { SITE_URL, SITE_IS_LIVE } from "@/lib/seo";
 import {
+  ADDRESS_CITY,
   ADDRESS_LINE_1,
+  ADDRESS_STATE,
+  ADDRESS_ZIP,
   CONTACT_EMAIL,
   FACEBOOK_URL,
   LADIES_PHONE_HREF,
@@ -11,21 +14,11 @@ import {
 } from "@/lib/contactInfo";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const dancingScript = Dancing_Script({
-  subsets: ['latin'],
-  weight:['400', '700'],
-  variable: '--font-script'
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-script",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -53,9 +46,9 @@ const structuredData = {
   address: {
     "@type": "PostalAddress",
     streetAddress: ADDRESS_LINE_1,
-    addressLocality: "Laconia",
-    addressRegion: "IN",
-    postalCode: "47135",
+    addressLocality: ADDRESS_CITY,
+    addressRegion: ADDRESS_STATE,
+    postalCode: ADDRESS_ZIP,
     addressCountry: "US",
   },
   contactPoint: [
@@ -83,12 +76,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} h-full antialiased`}
+      className={`${dancingScript.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          // Escaping "<" keeps a stray "</script>" in the data from closing the tag early.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
         />
         {children}
         <Footer />

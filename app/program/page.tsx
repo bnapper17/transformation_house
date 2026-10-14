@@ -6,19 +6,18 @@ import FoundersPhoto from "@/public/images/founders.jpg";
 import ChurchPhoto from "@/public/images/churchFiller.jpeg";
 import MeetingPhoto from "@/public/images/meetingFiller.jpeg";
 
+import { VISION } from "@/lib/vision";
+
 export const metadata: Metadata = {
   title: "Our Program",
   description:
     "Learn about Stepping into Freedom, the faith-based step program at Butterfly Transformation House — a Christian halfway house and drug and alcohol rehabilitation program in Laconia, Indiana.",
 };
 
-const LOREM_IPSUM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
 const SECTIONS = [
-  { title: "Vision", image: FoundersPhoto, alt: "Founders of Butterfly Transformation House" },
-  { title: "Church Services", image: ChurchPhoto, alt: "Hands reaching toward each other before a cross" },
-  { title: "Meetings", image: MeetingPhoto, alt: "A hand extended in support during a meeting" },
+  { title: "Vision", image: FoundersPhoto, alt: "Founders of Butterfly Transformation House", text: VISION },
+  { title: "Church Services", image: ChurchPhoto, alt: "Hands reaching toward each other before a cross", text: "Grace Tabernacle in Laconia, IN is our home church, which we attend on Wednesdays as well as Sundays." },
+  { title: "Meetings", image: MeetingPhoto, alt: "A hand extended in support during a meeting", text: "Every Monday, Tuesday, and Thursday we come together as one and learn more about the road to recovery." },
 ];
 
 export default function Program() {
@@ -27,8 +26,11 @@ export default function Program() {
       <Header />
       <div className="mx-auto max-w-5xl px-6 py-10">
         <h1 className="text-4xl font-serif text-secondary mb-2">Our Program</h1>
-        <p className="text-foreground mb-10">
-          This Sober living facility requires a completion of a faith based step program called; Stepping into Freedom.
+        <p className="text-foreground mb-8">
+          This sober living facility requires completion of a faith-based step program called Stepping into Freedom.
+        </p>
+        <p className="font-serif italic text-secondary text-2xl md:text-3xl leading-snug border-l-4 border-accent pl-5 mb-12">
+          &ldquo;Where broken lives are transformed, hope is restored, and families are made whole through Jesus Christ&rdquo;
         </p>
 
         <div className="space-y-16">
@@ -52,7 +54,7 @@ export default function Program() {
                 <h2 className="text-2xl font-serif text-secondary mb-3 border-b border-accent pb-2">
                   {section.title}
                 </h2>
-                <p className="text-foreground leading-relaxed">{LOREM_IPSUM}</p>
+                <p className="text-foreground leading-relaxed">{section.text}</p>
               </div>
             </section>
           ))}
