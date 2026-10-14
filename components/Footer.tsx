@@ -18,9 +18,10 @@ import {
 } from "@/lib/contactInfo";
 import { PhoneIcon, MailIcon, MapPinIcon, FacebookIcon } from "./icons";
 
-// On small screens there's no room for the full phone number / address, so
-// `compactLabel` (just enough to identify what the link is) is shown instead
-// of `detail`/`subDetail`, which take over at the `sm` breakpoint.
+// When both are given, `compactLabel` stands in for `detail`/`subDetail` below
+// the `sm` breakpoint (used where the full text, like the email address, is
+// too long for a phone screen). Links without a `compactLabel` always show
+// their full detail.
 function FooterLink({
   href,
   icon,
@@ -31,11 +32,13 @@ function FooterLink({
 }: {
   href: string;
   icon: React.ReactNode;
-  compactLabel: string;
+  compactLabel?: string;
   detail?: string;
   subDetail?: string;
   external?: boolean;
 }) {
+  const hasCompact = Boolean(compactLabel && detail);
+
   return (
     <a
       href={href}
@@ -43,9 +46,9 @@ function FooterLink({
       className="flex items-center gap-3 text-white hover:text-accent transition-colors"
     >
       <span className="flex-none">{icon}</span>
-      <span className={detail ? "sm:hidden" : ""}>{compactLabel}</span>
+      {compactLabel && <span className={hasCompact ? "sm:hidden" : ""}>{compactLabel}</span>}
       {detail && (
-        <span className="hidden sm:flex sm:flex-col sm:leading-tight">
+        <span className={`${hasCompact ? "hidden sm:flex" : "flex"} flex-col leading-tight`}>
           <span>{detail}</span>
           {subDetail && <span className="text-xs text-white/70">{subDetail}</span>}
         </span>
@@ -82,14 +85,12 @@ export default function Footer() {
             <FooterLink
               href={LADIES_PHONE_HREF}
               icon={<PhoneIcon className="h-5 w-5" />}
-              compactLabel="Ladies' Facility"
               detail={LADIES_PHONE_DISPLAY}
               subDetail={`Ladies' Facility — ${LADIES_CONTACT_NAME}`}
             />
             <FooterLink
               href={MENS_PHONE_HREF}
               icon={<PhoneIcon className="h-5 w-5" />}
-              compactLabel="Men's Facility"
               detail={MENS_PHONE_DISPLAY}
               subDetail={`Men's Facility — ${MENS_CONTACT_NAME}`}
             />
