@@ -1,7 +1,11 @@
 import { sendMail } from "@/lib/mailer";
+import { isHoneypotFilled } from "@/lib/honeypot";
 
 export async function POST(request: Request) {
   const body = await request.json();
+  // Pretend success so a bot that filled the hidden field gets no signal.
+  if (isHoneypotFilled(body)) return Response.json({ ok: true });
+
   const { name, phone, email, message } = body as {
     name?: string;
     phone?: string;
@@ -29,6 +33,7 @@ export async function POST(request: Request) {
     await sendMail({
       subject: `New Contact Form Submission — ${name}`,
       text,
+      replyTo: email,
     });
   } catch (error) {
     console.error("Failed to send contact email:", error);

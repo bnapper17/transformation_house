@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import { Field, inputClass } from "@/components/FormField";
+import HoneypotField from "@/components/HoneypotField";
+import { HONEYPOT_FIELD } from "@/lib/honeypot";
 import { PhoneIcon, MailIcon, MapPinIcon, FacebookIcon } from "@/components/icons";
 import { useMapsHref } from "@/lib/useMapsHref";
 import { nextPhoneValue } from "@/lib/phone";
@@ -76,7 +78,10 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          [HONEYPOT_FIELD]: new FormData(e.currentTarget).get(HONEYPOT_FIELD),
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
@@ -140,6 +145,7 @@ export default function ContactForm() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
+            <HoneypotField />
             <h2 className="text-2xl font-serif text-secondary border-b border-accent pb-2">
               Send Us a Message
             </h2>

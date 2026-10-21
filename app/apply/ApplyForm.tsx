@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import type { ApplicationFormState as FormState, YN } from "@/lib/applicationTypes";
 import { nextPhoneValue } from "@/lib/phone";
 import { Field, inputClass } from "@/components/FormField";
+import HoneypotField from "@/components/HoneypotField";
+import { HONEYPOT_FIELD } from "@/lib/honeypot";
 import { US_STATES } from "@/lib/usStates";
 
 const initialState: FormState = {
@@ -172,7 +174,10 @@ export default function ApplyForm() {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          [HONEYPOT_FIELD]: new FormData(e.currentTarget).get(HONEYPOT_FIELD),
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
@@ -218,6 +223,7 @@ export default function ApplyForm() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-2">
+          <HoneypotField />
           <Section title="Personal Information">
             <Field label="First Name" required>
               <input

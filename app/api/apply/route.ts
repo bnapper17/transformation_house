@@ -1,4 +1,5 @@
 import { sendMail } from "@/lib/mailer";
+import { isHoneypotFilled } from "@/lib/honeypot";
 import type { ApplicationFormState } from "@/lib/applicationTypes";
 
 function formatApplication(form: ApplicationFormState) {
@@ -44,6 +45,8 @@ function formatApplication(form: ApplicationFormState) {
 
 export async function POST(request: Request) {
   const form = (await request.json()) as ApplicationFormState;
+  // Pretend success so a bot that filled the hidden field gets no signal.
+  if (isHoneypotFilled(form)) return Response.json({ ok: true });
 
   if (!form.firstName?.trim() || !form.lastName?.trim() || !form.email?.trim()) {
     return Response.json({ error: "Missing required application fields." }, { status: 400 });
@@ -53,6 +56,7 @@ export async function POST(request: Request) {
     await sendMail({
       subject: `New Program Application — ${form.firstName} ${form.lastName}`,
       text: formatApplication(form),
+      replyTo: form.email,
     });
   } catch (error) {
     console.error("Failed to send application email:", error);
