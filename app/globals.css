@@ -21,6 +21,26 @@
   --breakpoint-nav: 1074px;
 }
 
+/*
+  Sticky Header height, in rem so it always fits the logo and site name
+  (a viewport-height value squeezed them against the top on short windows).
+  The home hero subtracts it to fill the rest of the screen. Steps match the
+  Header's md/lg size changes.
+*/
+:root {
+  --header-h: 5.5rem;
+}
+@media (min-width: 48rem) {
+  :root {
+    --header-h: 7.75rem;
+  }
+}
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 8.5rem;
+  }
+}
+
 /* Brand colors stay the same in dark mode; only the page background and text flip. */
 @media (prefers-color-scheme: dark) {
   :root {
