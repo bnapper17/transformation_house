@@ -7,6 +7,9 @@ import { useCurrentYear } from "@/lib/useCurrentYear";
 import {
   ADDRESS_LINE_1,
   ADDRESS_LINE_2,
+  CEO_CONTACT_NAME,
+  CEO_PHONE_DISPLAY,
+  CEO_PHONE_HREF,
   CONTACT_EMAIL,
   FACEBOOK_URL,
   LADIES_CONTACT_NAME,
@@ -93,6 +96,12 @@ export default function Footer() {
               icon={<PhoneIcon className="h-5 w-5" />}
               detail={MENS_PHONE_DISPLAY}
               subDetail={`Men's Facility — ${MENS_CONTACT_NAME}`}
+            />
+            <FooterLink
+              href={CEO_PHONE_HREF}
+              icon={<PhoneIcon className="h-5 w-5" />}
+              detail={CEO_PHONE_DISPLAY}
+              subDetail={`CEO — ${CEO_CONTACT_NAME}`}
             />
             <FooterLink
               href={`mailto:${CONTACT_EMAIL}`}

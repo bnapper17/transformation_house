@@ -11,6 +11,9 @@ import { nextPhoneValue } from "@/lib/phone";
 import {
   ADDRESS_LINE_1,
   ADDRESS_LINE_2,
+  CEO_CONTACT_NAME,
+  CEO_PHONE_DISPLAY,
+  CEO_PHONE_HREF,
   CONTACT_EMAIL,
   FACEBOOK_URL,
   LADIES_CONTACT_NAME,
@@ -115,6 +118,12 @@ export default function ContactForm() {
             icon={<PhoneIcon className="h-5 w-5" />}
             label={MENS_PHONE_DISPLAY}
             sublabel={`Men's Facility — ${MENS_CONTACT_NAME}`}
+          />
+          <ContactInfoLink
+            href={CEO_PHONE_HREF}
+            icon={<PhoneIcon className="h-5 w-5" />}
+            label={CEO_PHONE_DISPLAY}
+            sublabel={`CEO — ${CEO_CONTACT_NAME}`}
           />
           <ContactInfoLink
             href={`mailto:${CONTACT_EMAIL}`}

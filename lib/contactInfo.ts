@@ -6,6 +6,10 @@ export const MENS_PHONE_DISPLAY = "(812) 596-2863";
 export const MENS_PHONE_HREF = "tel:+18125962863";
 export const MENS_CONTACT_NAME = "Paul Horn";
 
+export const CEO_PHONE_DISPLAY = "(812) 736-9455";
+export const CEO_PHONE_HREF = "tel:+18127369455";
+export const CEO_CONTACT_NAME = "Mary Decker";
+
 export const CONTACT_EMAIL = "butterflytransformationhouse@gmail.com";
 
 export const ADDRESS_LINE_1 = "2515 Hooptown Rd SE";
