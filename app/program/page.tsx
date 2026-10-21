@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Header from "@/components/Header";
 import Image, { type StaticImageData } from "next/image";
 
@@ -9,11 +10,12 @@ import MentorshipPhoto from "@/public/images/mentorship.jpg";
 
 import { VISION } from "@/lib/vision";
 
-export const metadata: Metadata = {
-  title: "Our Program",
+export const metadata: Metadata = pageMetadata({
+  path: "/program",
+  title: "Christian Recovery Program & Sober Living",
   description:
-    "Learn about Stepping into Freedom, the faith-based step program at Butterfly Transformation House — a Christian halfway house and drug and alcohol rehabilitation program in Laconia, Indiana.",
-};
+    "Stepping into Freedom is the faith-based step program at Butterfly Transformation House, a Christian halfway house in Laconia, Indiana. Residents receive personal mentorship, recovery meetings, and church fellowship while rebuilding a life free from drugs and alcohol.",
+});
 
 // `imagePosition` sets the crop focus for photos whose subject isn't centered
 // (e.g. portrait shots squeezed into the 4:3 frame); defaults to center.
@@ -37,7 +39,7 @@ export default function Program() {
       <div className="mx-auto max-w-5xl px-6 py-10">
         <h1 className="text-4xl font-serif text-secondary mb-2">Our Program</h1>
         <p className="text-foreground lg:text-lg mb-8">
-          This sober living facility requires completion of a faith-based step program called Stepping into Freedom.
+          Our Christian sober living homes for men and women in Laconia, Indiana require completion of a faith-based step program called Stepping into Freedom.
         </p>
         <p className="font-serif italic text-secondary text-2xl md:text-3xl leading-snug border-l-4 border-accent pl-5 mb-12">
           &ldquo;Where broken lives are transformed, hope is restored, and families are made whole through Jesus Christ&rdquo;

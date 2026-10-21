@@ -36,7 +36,7 @@ Copy `.env.local` (not committed — see `.gitignore`) and fill in:
 | `SMTP_PASS`                 | Yes      | Gmail App Password for that account (requires 2-Step Verification)        |
 | `SMTP_FROM`                 | No       | "From" address on outgoing mail; defaults to `SMTP_USER`                |
 | `CONTACT_RECIPIENT_EMAIL`   | No       | Where Contact/Apply submissions are delivered; defaults to `CONTACT_EMAIL` in `lib/contactInfo.ts` |
-| `NEXT_PUBLIC_SITE_URL`      | No       | Canonical site URL used in the sitemap and metadata; falls back to Vercel's `VERCEL_URL`, then `localhost:3000` |
+| `NEXT_PUBLIC_SITE_URL`      | No       | Production URL (e.g. `https://example.org`) used for canonical links, the sitemap and share previews; falls back to Vercel's production domain, then `localhost:3000` |
 | `NEXT_PUBLIC_SITE_IS_LIVE`  | No       | Set to `"true"` only once real content/photos are final and the production domain is live — see below |
 
 Without the `SMTP_*` variables, the Contact/Apply forms still render
@@ -72,11 +72,19 @@ for old links and bookmarks — change the URL in that one place.
 
 ## SEO
 
+- `lib/seo.ts` holds the shared pieces: service areas (towns, counties,
+  regions), services offered, keywords, the share image, and
+  `pageMetadata()`, which gives each page its title, description, canonical
+  URL and Open Graph (Facebook/text-message preview) tags
 - `app/robots.ts` / `app/sitemap.ts` — generated from code, gated by
   `NEXT_PUBLIC_SITE_IS_LIVE`
-- Per-page `metadata` exports (title/description) on every route
-- `NGO` JSON-LD structured data in the root layout (`app/layout.tsx`), sourced
-  from `lib/contactInfo.ts`
+- `NGO` + `LocalBusiness` JSON-LD in the root layout (`app/layout.tsx`) with
+  address, phones, `areaServed` and a service list
+- The home page's "Christian Sober Living in Southern Indiana" section is the
+  visible text that local searches match — keep the towns there in step with
+  `SERVICE_AREAS`
+- After launch: verify the site in Google Search Console and submit
+  `/sitemap.xml`, and claim a Google Business Profile for the Laconia address
 
 ## Tech Stack
 

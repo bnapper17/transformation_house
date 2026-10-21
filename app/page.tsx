@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,11 +7,17 @@ import GroupPhoto from "@/public/images/goup_edit.jpg";
 import { VISION_SUMMARY } from "@/lib/vision";
 import { GIVING_URL } from "@/lib/contactInfo";
 
+// Title and description come from the root layout; only the canonical is
+// page-specific (set here so it isn't inherited by pages like the 404).
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
 export default function Home() {
   return(
     <div>
       <Header/>
-      <h1 className="sr-only">Butterfly Transformation House</h1>
+      <h1 className="sr-only">
+        Butterfly Transformation House: Christian Halfway House &amp; Sober Living in Southern Indiana
+      </h1>
       {/* Sized to the remaining viewport below the sticky Header (--header-h) so the Apply button is visible with no scroll. */}
       <div className="h-[calc(100dvh-var(--header-h))] flex flex-col">
 
@@ -73,6 +80,44 @@ export default function Home() {
               className="inline-block mt-6 rounded-full border-2 border-secondary px-6 py-2 text-secondary font-semibold hover:bg-secondary hover:text-white transition-colors"
             >
               Learn About Our Program
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Plain-language summary of who we serve and where: this is the text
+          search engines match for local searches like "sober living New Albany". */}
+      <section className="mx-auto max-w-5xl px-6 py-12 xl:py-16 flex flex-col xl:flex-row gap-6 xl:gap-12 text-center xl:text-left">
+        <div className="xl:w-1/3 flex-none">
+          <h2 className="text-3xl xl:text-4xl font-serif text-secondary">
+            Christian Sober Living in Southern Indiana
+          </h2>
+          <div className="w-16 mx-auto xl:mx-0 mt-3 border-b-2 border-accent" />
+        </div>
+        <div className="flex-1 space-y-4 text-foreground text-lg leading-relaxed">
+          <p>
+            Butterfly Transformation House is a faith-based halfway house in Laconia, Indiana, with
+            separate homes for men and women in recovery from drug and alcohol addiction. Residents
+            live in a safe, Christ-centered community while completing our Stepping into Freedom step
+            program, with personal mentorship, weekly recovery meetings, and church fellowship.
+          </p>
+          <p>
+            Located in Harrison County, we welcome men and women from across Southern Indiana,
+            including Corydon, New Albany, Jeffersonville, and Clarksville, as well as Louisville and
+            the greater Kentuckiana area.
+          </p>
+          <div className="flex flex-wrap justify-center xl:justify-start gap-4 pt-2">
+            <Link
+              href="/apply"
+              className="rounded-full bg-secondary px-6 py-2 text-white font-semibold hover:bg-secondary/90 transition-colors"
+            >
+              Apply Now
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border-2 border-secondary px-6 py-2 text-secondary font-semibold hover:bg-secondary hover:text-white transition-colors"
+            >
+              Contact Us
             </Link>
           </div>
         </div>

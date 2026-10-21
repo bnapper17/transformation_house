@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { Dancing_Script } from "next/font/google";
 import Footer from "@/components/Footer";
-import { SITE_URL, SITE_IS_LIVE } from "@/lib/seo";
+import {
+  KEYWORDS,
+  SERVICE_AREAS,
+  SERVICES,
+  SHARE_IMAGE,
+  SITE_IS_LIVE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 import {
   ADDRESS_CITY,
   ADDRESS_LINE_1,
@@ -20,15 +28,31 @@ const dancingScript = Dancing_Script({
   variable: "--font-script",
 });
 
+const DESCRIPTION =
+  "Butterfly Transformation House is a faith-based, non-profit halfway house and Christian sober living home in Laconia, Indiana, offering a Christ-centered drug and alcohol recovery program for men and women across Southern Indiana and the Louisville area.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "Butterfly Transformation House | Faith-Based Halfway House & Sober Living in Laconia, IN",
-    template: "%s | Butterfly Transformation House",
+    default: `${SITE_NAME} | Christian Halfway House & Sober Living in Southern Indiana`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Butterfly Transformation House is a faith-based, non-profit halfway house offering a Christ-centered drug and alcohol rehabilitation program for men and women in Laconia, Indiana.",
+  description: DESCRIPTION,
+  keywords: KEYWORDS,
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | Christian Halfway House & Sober Living in Southern Indiana`,
+    description: DESCRIPTION,
+    url: "/",
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [SHARE_IMAGE.url],
+  },
   robots: SITE_IS_LIVE
     ? { index: true, follow: true }
     : { index: false, follow: false },
@@ -36,13 +60,31 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "NGO",
-  name: "Butterfly Transformation House",
-  description:
-    "A faith-based, non-profit halfway house offering a Christ-centered drug and alcohol rehabilitation program for men and women.",
+  // NGO for the non-profit, LocalBusiness so search engines treat it as a
+  // place with a service area for "near me" and town-name searches.
+  "@type": ["NGO", "LocalBusiness"],
+  name: SITE_NAME,
+  description: DESCRIPTION,
+  slogan: "Helping you grow in your relationship with God and living a life free from addiction",
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo_image.png`,
+  image: `${SITE_URL}${SHARE_IMAGE.url}`,
   email: CONTACT_EMAIL,
+  telephone: LADIES_PHONE_HREF.replace("tel:", ""),
+  areaServed: [
+    ...SERVICE_AREAS.cities.map((name) => ({ "@type": "City", name })),
+    ...SERVICE_AREAS.counties.map((name) => ({ "@type": "AdministrativeArea", name })),
+    ...SERVICE_AREAS.regions.map((name) => ({ "@type": "Place", name })),
+  ],
+  knowsAbout: ["Addiction recovery", "Sober living", "Christian discipleship", "Faith-based recovery"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Recovery services",
+    itemListElement: SERVICES.map((name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    })),
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: ADDRESS_LINE_1,

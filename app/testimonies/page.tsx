@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Header from "@/components/Header";
 import Image from "next/image";
 
@@ -7,11 +8,12 @@ import AshleyPhoto from "@/public/images/ashley.jpg";
 import CodyPhoto from "@/public/images/cody.jpg";
 import TrishPhoto from "@/public/images/trish.jpg";
 
-export const metadata: Metadata = {
-  title: "Testimonies",
+export const metadata: Metadata = pageMetadata({
+  path: "/testimonies",
+  title: "Recovery Testimonies",
   description:
-    "Real stories of recovery and transformation from men and women who found freedom from addiction through Butterfly Transformation House's faith-based halfway house program.",
-};
+    "Real stories of recovery from men and women who found freedom from drug and alcohol addiction through Butterfly Transformation House, a faith-based halfway house serving Southern Indiana and the Louisville area.",
+});
 
 const TESTIMONIES = [
   {
