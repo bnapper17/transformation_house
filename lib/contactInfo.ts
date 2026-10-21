@@ -17,6 +17,8 @@ export const FULL_ADDRESS = `${ADDRESS_LINE_1}, ${ADDRESS_LINE_2}`;
 
 export const FACEBOOK_URL = "https://www.facebook.com/TheButterflyTransformationHouse";
 
+export const GIVING_URL = "https://secure.myvanco.com/L-ZNQ3/campaign/C-157FG?access=tile_direct";
+
 export const GOOGLE_MAPS_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   FULL_ADDRESS
 )}`;

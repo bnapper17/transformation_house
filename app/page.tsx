@@ -4,14 +4,15 @@ import Link from "next/link";
 
 import GroupPhoto from "@/public/images/goup_edit.jpg";
 import { VISION_SUMMARY } from "@/lib/vision";
+import { GIVING_URL } from "@/lib/contactInfo";
 
 export default function Home() {
   return(
     <div>
       <Header/>
       <h1 className="sr-only">Butterfly Transformation House</h1>
-      {/* Sized to the remaining viewport below the sticky Header (10dvh / 15dvh) so the Apply button is visible with no scroll. */}
-      <div className="h-[90dvh] md:h-[85dvh] flex flex-col">
+      {/* Sized to the remaining viewport below the sticky Header (--header-h) so the Apply button is visible with no scroll. */}
+      <div className="h-[calc(100dvh-var(--header-h))] flex flex-col">
 
         <div className="flex-1 flex flex-col xl:flex-row overflow-hidden">
 
@@ -49,7 +50,7 @@ export default function Home() {
             Apply Now
           </Link>
           <Link
-            href="/giving"
+            href={GIVING_URL}
             className="rounded-full bg-secondary px-8 py-3 text-lg text-white shadow-lg hover:bg-secondary/90 transition-colors"
           >
             Give

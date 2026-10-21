@@ -1,10 +1,11 @@
 import Link from "next/link"
+import { GIVING_URL } from "@/lib/contactInfo"
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/program", label: "Program" },
   { href: "/testimonies", label: "Testimonies" },
-  { href: "/giving", label: "Giving" },
+  { href: GIVING_URL, label: "Giving" },
   { href: "/contact", label: "Contact" },
   { href: "/apply", label: "Apply" },
 ];
