@@ -19,7 +19,7 @@ export const ADDRESS_ZIP = "47135";
 export const ADDRESS_LINE_2 = `${ADDRESS_CITY}, ${ADDRESS_STATE} ${ADDRESS_ZIP}`;
 export const FULL_ADDRESS = `${ADDRESS_LINE_1}, ${ADDRESS_LINE_2}`;
 
-export const FACEBOOK_URL = "https://www.facebook.com/TheButterflyTransformationHouse";
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=100089571820481";
 
 export const GIVING_URL = "https://secure.myvanco.com/L-ZNQ3/campaign/C-157FG?access=tile_direct";
 
